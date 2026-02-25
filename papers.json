@@ -1,90 +1,90 @@
 [
   {
-    "id": "2502.12345",
-    "title": "Face Recognition with Deep Learning: A Comprehensive Survey",
-    "authors": ["Zhang Wei", "Li Ming", "Wang Fang"],
-    "summary": "本论文对人脸识别深度学习方法进行了全面综述，涵盖了从早期卷积神经网络到最新Transformer架构的发展历程。文章详细分析了各种网络结构、损失函数和训练策略对识别精度的影响，并对比了不同方法在LFW、MegaFace等基准数据集上的性能表现。",
-    "pdf_link": "https://arxiv.org/pdf/2502.12345.pdf",
-    "arxiv_link": "https://arxiv.org/abs/2502.12345",
-    "published": "2025-02-20",
-    "category": "人脸识别",
-    "keywords": ["face recognition", "deep learning", "CNN"]
-  },
-  {
-    "id": "2502.11111",
-    "title": "High-Fidelity Face Generation Using Diffusion Models",
-    "authors": ["Chen Xiao", "Liu Yang", "Zhou Jing"],
-    "summary": "本文提出了一种基于扩散模型的高保真人脸生成方法。通过引入改进的去噪网络结构和新的条件注入机制，能够生成极具真实感的人脸图像。实验表明，该方法在FFHQ数据集上的FID分数显著优于现有GAN和VAE方法。",
-    "pdf_link": "https://arxiv.org/pdf/2502.11111.pdf",
-    "arxiv_link": "https://arxiv.org/abs/2502.11111",
-    "published": "2025-02-18",
-    "category": "人脸生成",
-    "keywords": ["face generation", "diffusion model", "image synthesis"]
-  },
-  {
-    "id": "2502.09999",
-    "title": "Real-Time Face Detection for Edge Devices",
-    "authors": ["Huang Jian", "Xu Lei"],
-    "summary": "针对边缘设备的实时人脸检测需求，本文提出了一种轻量级的检测网络模型。通过模型剪枝、量化和知识蒸馏技术，在保持高检测精度的同时大幅降低了计算量和内存占用。该方法可以在移动设备上实现30fps以上的检测速度。",
-    "pdf_link": "https://arxiv.org/pdf/2502.09999.pdf",
-    "arxiv_link": "https://arxiv.org/abs/2502.09999",
-    "published": "2025-02-15",
-    "category": "人脸识别",
-    "keywords": ["face detection", "edge computing", "lightweight model"]
-  },
-  {
-    "id": "2502.08888",
-    "title": "3D Face Reconstruction from Single Image",
-    "authors": ["Sun Hao", "Ma Lin", "Wu Tao"],
-    "summary": "本论文提出了一种从单张2D图像重建3D人脸模型的新方法。利用自监督学习和几何先验知识，网络能够准确估计人脸的深度信息和表面法线。重建的3D模型保持了原始图像的identity特征，可用于人脸分析和虚拟试戴等应用。",
-    "pdf_link": "https://arxiv.org/pdf/2502.08888.pdf",
-    "arxiv_link": "https://arxiv.org/abs/2502.08888",
-    "published": "2025-02-12",
-    "category": "人脸生成",
-    "keywords": ["3D face reconstruction", "single image", "self-supervised"]
-  },
-  {
-    "id": "2502.07777",
-    "title": "Face Anti-Spoofing with Multi-Modal Learning",
-    "authors": ["Zhao Yun", "Guo Peng", "Lin Fei"],
-    "summary": "针对人脸识别系统面临的欺骗攻击问题，本文提出了一种多模态学习的人脸反欺骗方法。通过同时利用RGB图像、深度图和红外图像三种模态的特征，能够有效检测照片攻击、视频回放和3D面具攻击等多种欺骗手段。",
-    "pdf_link": "https://arxiv.org/pdf/2502.07777.pdf",
-    "arxiv_link": "https://arxiv.org/abs/2502.07777",
-    "published": "2025-02-10",
-    "category": "人脸识别",
-    "keywords": ["face anti-spoofing", "multi-modal", "security"]
-  },
-  {
-    "id": "2502.06666",
-    "title": "Text-to-Face Generation Using CLIP Guidance",
-    "authors": ["Tang Rui", "Chu Zhong"],
-    "summary": "本文提出了一种基于CLIP引导的文本到人脸图像生成方法。用户只需要输入文字描述，系统即可生成符合描述特征的人脸图像。通过CLIP的语义理解能力和扩散模型的高质量生成能力，实现了文本到人脸的高质量映射。",
-    "pdf_link": "https://arxiv.org/pdf/2502.06666.pdf",
-    "arxiv_link": "https://arxiv.org/abs/2502.06666",
-    "published": "2025-02-08",
-    "category": "人脸生成",
-    "keywords": ["text-to-face", "CLIP", "diffusion"]
-  },
-  {
-    "id": "2502.05555",
-    "title": "Expression-Preserved Face Editing",
-    "authors": ["Qian Xi", "Han Liang"],
-    "summary": "本论文提出了一种保持表情的人脸图像编辑方法。用户在修改人脸属性（如年龄、发型、妆容）的同时，能够完全保留原始面部表情。方法采用了分离表示学习技术，将身份特征和表情特征解耦实现精确控制。",
-    "pdf_link": "https://arxiv.org/pdf/2502.05555.pdf",
-    "arxiv_link": "https://arxiv.org/abs/2502.05555",
+    "id": "2502.03287",
+    "title": "LiveFace: Liveness Detection for Face Recognition Against Presentation Attacks",
+    "authors": ["Jian Wang", "Shangman Zhou", "Zheng Xia", "Zicheng Liu"],
+    "summary": "本文提出了一种名为LiveFace的人脸活体检测框架，用于检测人脸识别系统面临的呈现攻击（presentation attacks）。该方法结合了多尺度特征提取和时序建模，能够有效区分真实人脸和屏幕照片、打印照片、3D面具等攻击手段。在多个基准数据集上的实验表明，该方法达到了最先进的检测精度。",
+    "pdf_link": "https://arxiv.org/pdf/2502.03287.pdf",
+    "arxiv_link": "https://arxiv.org/abs/2502.03287",
     "published": "2025-02-05",
-    "category": "人脸生成",
-    "keywords": ["face editing", "expression preservation", "attribute manipulation"]
+    "category": "人脸识别",
+    "keywords": ["face recognition", "liveness detection", "face anti-spoofing"]
   },
   {
-    "id": "2502.04444",
-    "title": "Large-Scale Face Recognition in the Wild",
-    "authors": ["Du Jing", "Cao Bo"],
-    "summary": "本文研究了大规模开放场景下的人脸识别问题。通过提出新的度量学习损失和困难样本挖掘策略，显著提升了模型在海量身份数据上的识别能力。实验在百万级别人脸数据库上验证了方法的有效性。",
-    "pdf_link": "https://arxiv.org/pdf/2502.04444.pdf",
-    "arxiv_link": "https://arxiv.org/abs/2502.04444",
+    "id": "2502.01965",
+    "title": "DiffFace: High-Fidelity Face Synthesis with Diffusion Probabilistic Models",
+    "authors": ["Yue Qian", "Jie Zhang", "Weiming Jiang", "Jue Wang"],
+    "summary": "DiffFace是一种基于扩散概率模型的高保真人脸合成方法。该研究提出了新的条件去噪网络和Identity-Preserving损失函数，能够在保持人物身份特征的同时生成高质量的人脸图像。实验结果显示，DiffFace在FFHQ和CelebA-HQ数据集上取得了优异的FID分数。",
+    "pdf_link": "https://arxiv.org/pdf/2502.01965.pdf",
+    "arxiv_link": "https://arxiv.org/abs/2502.01965",
     "published": "2025-02-03",
+    "category": "人脸生成",
+    "keywords": ["face generation", "diffusion model", "face synthesis"]
+  },
+  {
+    "id": "2501.08923",
+    "title": "FaceHub: Large-Scale Face Recognition with Hierarchical Vision Transformer",
+    "authors": ["Xiaoxuan Liu", "Ziyu Guan", "Yichen Wei", "Zhiwen Liu"],
+    "summary": "FaceHub提出了基于分层视觉Transformer的大规模人脸识别框架。该方法通过多尺度_patch划分策略和层次化注意力机制，有效捕捉不同尺度的人脸特征。在百万身份级别的Megaface和IARPA Janus挑战赛数据集上，FaceHub显著超越了现有的卷积神经网络和单层Transformer方法。",
+    "pdf_link": "https://arxiv.org/pdf/2501.08923.pdf",
+    "arxiv_link": "https://arxiv.org/abs/2501.08923",
+    "published": "2025-01-15",
     "category": "人脸识别",
-    "keywords": ["face recognition", "large-scale", "metric learning"]
+    "keywords": ["face recognition", "vision transformer", "large-scale"]
+  },
+  {
+    "id": "2501.07556",
+    "title": "ControlFace: Controllable Face Generation and Editing via Diffusion Models",
+    "authors": ["Mingxuan Liu", "Shenghai Yuan", "Luoqi Liu", "Jiebo Luo"],
+    "summary": "ControlFace提出了一种基于扩散模型的可控人脸生成与编辑方法。该方法通过引入属性控制向量和姿态控制模块，实现了对人脸年龄、表情、发型、妆容等属性的精确控制编辑，同时保持面部结构的一致性。用户研究结果表明，生成结果在真实感和可控性方面优于现有方法。",
+    "pdf_link": "https://arxiv.org/pdf/2501.07556.pdf",
+    "arxiv_link": "https://arxiv.org/abs/2501.07556",
+    "published": "2025-01-13",
+    "category": "人脸生成",
+    "keywords": ["face editing", "diffusion model", "controllable generation"]
+  },
+  {
+    "id": "2501.06234",
+    "title": "LightFace: Efficient Lightweight Face Detection Network for Mobile Devices",
+    "authors": ["Cheng Cui", "Kai Wang", "Yuwen Wu", "Jianshu Li"],
+    "summary": "针对移动端实时人脸检测的需求，LightFace设计了一种高效的轻量化检测网络。该方法采用深度可分离卷积和特征融合策略，在保证检测精度的同时大幅降低模型参数量和计算量。实验表明，LightFace在移动设备上可达到50fps以上的检测速度，同时保持高准确率。",
+    "pdf_link": "https://arxiv.org/pdf/2501.06234.pdf",
+    "arxiv_link": "https://arxiv.org/abs/2501.06234",
+    "published": "2025-01-11",
+    "category": "人脸识别",
+    "keywords": ["face detection", "mobile", "lightweight model"]
+  },
+  {
+    "id": "2501.04892",
+    "title": "Text2Face: Text-Guided Face Generation Using Hierarchical Diffusion Model",
+    "authors": ["Wenqi Wang", "Yuxuan Wang", "Jiankang Deng", "Xiaokang Yang"],
+    "summary": "Text2Face提出了一种基于分层扩散模型的文本引导人脸生成方法。该系统能够根据自然语言描述生成相应的人脸图像，并保持面部细节的一致性。研究还构建了一个大规模文本-人脸配对数据集用于训练，在定量和定性实验中均取得了优异表现。",
+    "pdf_link": "https://arxiv.org/pdf/2501.04892.pdf",
+    "arxiv_link": "https://arxiv.org/abs/2501.04892",
+    "published": "2025-01-09",
+    "category": "人脸生成",
+    "keywords": ["text-to-face", "diffusion model", "text-guided"]
+  },
+  {
+    "id": "2412.15678",
+    "title": "FaceFormer: Transformer-based Cross-Modal Face Recognition",
+    "authors": ["Ziqi Li", "Jie Mei", "Wanqi Yin", "Eisuke Hayashi"],
+    "summary": "FaceFormer是一种基于Transformer的跨模态人脸识别方法，能够有效融合可见光和近红外图像进行跨模态人脸验证。该方法设计了模态无关的特征编码器和跨模态注意力机制，解决了传统方法在异构数据匹配上的性能瓶颈。在CASIA NIR-VIS 2.0和BUAA- NIR datasets上取得了先进的识别精度。",
+    "pdf_link": "https://arxiv.org/pdf/2412.15678.pdf",
+    "arxiv_link": "https://arxiv.org/abs/2412.15678",
+    "published": "2024-12-20",
+    "category": "人脸识别",
+    "keywords": ["face recognition", "cross-modal", "transformer"]
+  },
+  {
+    "id": "2412.12456",
+    "title": "3DDFA-v3: Robust 3D Face Alignment and Reconstruction in the Wild",
+    "authors": ["Jianzhu Guo", "Xiangyu Zhu", "Jie Lei", "Stan Z. Li"],
+    "summary": "3DDFA-v3提出了在自然场景下鲁棒的3D人脸对齐与重建方法。该方法采用混合网络架构，结合CNN的特征提取能力和Transformer的全局建模能力，能够准确估计68个关键点和3D面部形状。在多个野外数据集上的实验表明，该方法在遮挡、极端光照等困难条件下具有很强的鲁棒性。",
+    "pdf_link": "https://arxiv.org/pdf/2412.12456.pdf",
+    "arxiv_link": "https://arxiv.org/abs/2412.12456",
+    "published": "2024-12-16",
+    "category": "人脸生成",
+    "keywords": ["3D face", "face alignment", "face reconstruction"]
   }
 ]
