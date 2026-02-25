@@ -65,14 +65,27 @@ class ReadmeGenerator:
         """生成统计信息"""
         rec_count = len(papers.get("face_recognition", []))
         gen_count = len(papers.get("face_generation", []))
+        sources = papers.get("sources", {})
+
+        # 生成来源统计
+        source_lines = []
+        for source, count in sources.items():
+            if count > 0:
+                source_lines.append(f"- **{source}**: {count} 篇")
+
+        source_str = "\n".join(source_lines) if source_lines else "- arXiv: 0 篇"
 
         return f"""### 📊 今日统计
 
+**论文分类:**
 - **人脸识别论文**: {rec_count} 篇
 - **人脸生成论文**: {gen_count} 篇
 - **总计**: {rec_count + gen_count} 篇
 
-> 📡 数据来源: arXiv CS.CV (Computer Vision and Pattern Recognition)
+**来源统计:**
+{source_str}
+
+> 📡 数据来源: arXiv, CVPR, ICCV, ECCV, NeurIPS 等会议/预印本
 
 ---
 
