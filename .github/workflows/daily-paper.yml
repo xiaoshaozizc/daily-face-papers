@@ -6,7 +6,7 @@ on:
     - cron: '0 0 * * *'
   # 支持手动触发
   workflow_dispatch:
-  # 代码提交时也可以触发（可选）
+  # 代码提交时也可以触发
   push:
     branches:
       - main
@@ -36,13 +36,53 @@ jobs:
         run: |
           python scripts/main.py
 
-      # 5. 配置 Git 用户信息
+      # 5. 更新论文统计
+      - name: Update paper count
+        id: count
+        run: |
+          python -c "
+          import json
+          from datetime import datetime
+
+          # 读取论文数据
+          with open('papers.json', 'r', encoding='utf-8') as f:
+              papers = json.load(f)
+
+          total = len(papers)
+          recognition = len([p for p in papers if p.get('category') == '人脸识别'])
+          generation = len([p for p in papers if p.get('category') == '人脸生成'])
+
+          print(f'Total: {total}, Recognition: {recognition}, Generation: {generation}')
+
+          # 输出给GitHub Actions
+          print(f'::set-output name=total::{total}')
+          print(f'::set-output name=recognition::{recognition}')
+          print(f'::set-output name=generation::{generation}')
+
+          # 更新README中的日期
+          today = datetime.now().strftime('%Y-%m-%d')
+          with open('README.md', 'r', encoding='utf-8') as f:
+              readme = f.read()
+
+          # 更新日期
+          readme = readme.replace('今日推荐 (YYYY-MM-DD)', f'今日推荐 ({today})')
+
+          # 更新统计
+          readme = readme.replace('**人脸识别论文**: X 篇', f'**人脸识别论文**: {recognition} 篇')
+          readme = readme.replace('**人脸生成论文**: X 篇', f'**人脸生成论文**: {generation} 篇')
+          readme = readme.replace('**总计**: X 篇', f'**总计**: {total} 篇')
+
+          with open('README.md', 'w', encoding='utf-8') as f:
+              f.write(readme)
+          "
+
+      # 6. 配置 Git 用户信息
       - name: Configure Git
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
 
-      # 6. 检查是否有更改
+      # 7. 检查是否有更改
       - name: Check for changes
         id: check_changes
         run: |
@@ -53,7 +93,7 @@ jobs:
             echo "changed=true" >> $GITHUB_OUTPUT
           fi
 
-      # 7. 提交更改
+      # 8. 提交更改
       - name: Commit and push
         if: steps.check_changes.outputs.changed == 'true'
         run: |
@@ -64,9 +104,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # 8. 输出结果
+      # 9. 输出结果
       - name: Summary
         if: steps.check_changes.outputs.changed == 'true'
         run: |
           echo "✅ 今日论文推荐已更新"
+          echo "📊 论文总数: ${{ steps.count.outputs.total }}"
           echo "📁 查看 [README.md](./README.md)"

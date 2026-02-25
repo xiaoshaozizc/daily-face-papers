@@ -53,6 +53,22 @@
             margin-left: 10px;
         }
 
+        .stats-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            font-size: 13px;
+            margin-left: 15px;
+        }
+
+        .stats-badge .count {
+            font-weight: bold;
+            color: #00d2ff;
+        }
+
         /* 搜索框 */
         .search-box {
             display: flex;
@@ -421,6 +437,9 @@
             <div class="logo">
                 📄 每日人脸论文推荐
                 <span>arXiv Papers</span>
+                <div class="stats-badge">
+                    📊 共 <span class="count" id="topCount">0</span> 篇论文
+                </div>
             </div>
             <div class="search-box">
                 <input type="text" id="searchInput" placeholder="搜索论文标题、作者或关键词...">
@@ -486,6 +505,7 @@
             const recognition = allPapers.filter(p => p.category === '人脸识别').length;
             const generation = allPapers.filter(p => p.category === '人脸生成').length;
 
+            document.getElementById('topCount').textContent = allPapers.length;
             document.getElementById('countAll').textContent = `(${allPapers.length})`;
             document.getElementById('countRecognition').textContent = `(${recognition})`;
             document.getElementById('countGeneration').textContent = `(${generation})`;
