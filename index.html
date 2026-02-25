@@ -188,6 +188,16 @@
             color: #ff6b6b;
         }
 
+        .paper-source {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 11px;
+            background: rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+            margin-left: 8px;
+        }
+
         .paper-title {
             font-size: 18px;
             font-weight: 600;
@@ -532,13 +542,14 @@
                     <span class="paper-category ${paper.category === '人脸识别' ? 'recognition' : 'generation'}">
                         ${paper.category === '人脸识别' ? '🔍' : '🎨'} ${paper.category}
                     </span>
+                    <span class="paper-source">${paper.source || 'arXiv'}</span>
                     <h3 class="paper-title">${paper.title}</h3>
-                    <p class="paper-authors">👤 ${paper.authors.join(', ')}</p>
+                    <p class="paper-authors">👤 ${paper.authors ? paper.authors.join(', ') : 'Unknown'}</p>
                     <p class="paper-summary">${paper.summary}</p>
                     <div class="paper-meta">
                         <span class="paper-date">📅 ${paper.published}</span>
                         <div class="paper-links">
-                            <a href="${paper.arxiv_link}" target="_blank">arXiv</a>
+                            <a href="${paper.arxiv_link}" target="_blank">查看</a>
                             <a href="${paper.pdf_link}" target="_blank">PDF</a>
                         </div>
                     </div>
