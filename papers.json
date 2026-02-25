@@ -1,0 +1,90 @@
+[
+  {
+    "id": "2502.12345",
+    "title": "Face Recognition with Deep Learning: A Comprehensive Survey",
+    "authors": ["Zhang Wei", "Li Ming", "Wang Fang"],
+    "summary": "本论文对人脸识别深度学习方法进行了全面综述，涵盖了从早期卷积神经网络到最新Transformer架构的发展历程。文章详细分析了各种网络结构、损失函数和训练策略对识别精度的影响，并对比了不同方法在LFW、MegaFace等基准数据集上的性能表现。",
+    "pdf_link": "https://arxiv.org/pdf/2502.12345.pdf",
+    "arxiv_link": "https://arxiv.org/abs/2502.12345",
+    "published": "2025-02-20",
+    "category": "人脸识别",
+    "keywords": ["face recognition", "deep learning", "CNN"]
+  },
+  {
+    "id": "2502.11111",
+    "title": "High-Fidelity Face Generation Using Diffusion Models",
+    "authors": ["Chen Xiao", "Liu Yang", "Zhou Jing"],
+    "summary": "本文提出了一种基于扩散模型的高保真人脸生成方法。通过引入改进的去噪网络结构和新的条件注入机制，能够生成极具真实感的人脸图像。实验表明，该方法在FFHQ数据集上的FID分数显著优于现有GAN和VAE方法。",
+    "pdf_link": "https://arxiv.org/pdf/2502.11111.pdf",
+    "arxiv_link": "https://arxiv.org/abs/2502.11111",
+    "published": "2025-02-18",
+    "category": "人脸生成",
+    "keywords": ["face generation", "diffusion model", "image synthesis"]
+  },
+  {
+    "id": "2502.09999",
+    "title": "Real-Time Face Detection for Edge Devices",
+    "authors": ["Huang Jian", "Xu Lei"],
+    "summary": "针对边缘设备的实时人脸检测需求，本文提出了一种轻量级的检测网络模型。通过模型剪枝、量化和知识蒸馏技术，在保持高检测精度的同时大幅降低了计算量和内存占用。该方法可以在移动设备上实现30fps以上的检测速度。",
+    "pdf_link": "https://arxiv.org/pdf/2502.09999.pdf",
+    "arxiv_link": "https://arxiv.org/abs/2502.09999",
+    "published": "2025-02-15",
+    "category": "人脸识别",
+    "keywords": ["face detection", "edge computing", "lightweight model"]
+  },
+  {
+    "id": "2502.08888",
+    "title": "3D Face Reconstruction from Single Image",
+    "authors": ["Sun Hao", "Ma Lin", "Wu Tao"],
+    "summary": "本论文提出了一种从单张2D图像重建3D人脸模型的新方法。利用自监督学习和几何先验知识，网络能够准确估计人脸的深度信息和表面法线。重建的3D模型保持了原始图像的identity特征，可用于人脸分析和虚拟试戴等应用。",
+    "pdf_link": "https://arxiv.org/pdf/2502.08888.pdf",
+    "arxiv_link": "https://arxiv.org/abs/2502.08888",
+    "published": "2025-02-12",
+    "category": "人脸生成",
+    "keywords": ["3D face reconstruction", "single image", "self-supervised"]
+  },
+  {
+    "id": "2502.07777",
+    "title": "Face Anti-Spoofing with Multi-Modal Learning",
+    "authors": ["Zhao Yun", "Guo Peng", "Lin Fei"],
+    "summary": "针对人脸识别系统面临的欺骗攻击问题，本文提出了一种多模态学习的人脸反欺骗方法。通过同时利用RGB图像、深度图和红外图像三种模态的特征，能够有效检测照片攻击、视频回放和3D面具攻击等多种欺骗手段。",
+    "pdf_link": "https://arxiv.org/pdf/2502.07777.pdf",
+    "arxiv_link": "https://arxiv.org/abs/2502.07777",
+    "published": "2025-02-10",
+    "category": "人脸识别",
+    "keywords": ["face anti-spoofing", "multi-modal", "security"]
+  },
+  {
+    "id": "2502.06666",
+    "title": "Text-to-Face Generation Using CLIP Guidance",
+    "authors": ["Tang Rui", "Chu Zhong"],
+    "summary": "本文提出了一种基于CLIP引导的文本到人脸图像生成方法。用户只需要输入文字描述，系统即可生成符合描述特征的人脸图像。通过CLIP的语义理解能力和扩散模型的高质量生成能力，实现了文本到人脸的高质量映射。",
+    "pdf_link": "https://arxiv.org/pdf/2502.06666.pdf",
+    "arxiv_link": "https://arxiv.org/abs/2502.06666",
+    "published": "2025-02-08",
+    "category": "人脸生成",
+    "keywords": ["text-to-face", "CLIP", "diffusion"]
+  },
+  {
+    "id": "2502.05555",
+    "title": "Expression-Preserved Face Editing",
+    "authors": ["Qian Xi", "Han Liang"],
+    "summary": "本论文提出了一种保持表情的人脸图像编辑方法。用户在修改人脸属性（如年龄、发型、妆容）的同时，能够完全保留原始面部表情。方法采用了分离表示学习技术，将身份特征和表情特征解耦实现精确控制。",
+    "pdf_link": "https://arxiv.org/pdf/2502.05555.pdf",
+    "arxiv_link": "https://arxiv.org/abs/2502.05555",
+    "published": "2025-02-05",
+    "category": "人脸生成",
+    "keywords": ["face editing", "expression preservation", "attribute manipulation"]
+  },
+  {
+    "id": "2502.04444",
+    "title": "Large-Scale Face Recognition in the Wild",
+    "authors": ["Du Jing", "Cao Bo"],
+    "summary": "本文研究了大规模开放场景下的人脸识别问题。通过提出新的度量学习损失和困难样本挖掘策略，显著提升了模型在海量身份数据上的识别能力。实验在百万级别人脸数据库上验证了方法的有效性。",
+    "pdf_link": "https://arxiv.org/pdf/2502.04444.pdf",
+    "arxiv_link": "https://arxiv.org/abs/2502.04444",
+    "published": "2025-02-03",
+    "category": "人脸识别",
+    "keywords": ["face recognition", "large-scale", "metric learning"]
+  }
+]

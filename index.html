@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>每日人脸论文推荐</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        /* 顶部导航 */
+        .header {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            padding: 20px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo span {
+            font-size: 14px;
+            opacity: 0.7;
+            margin-left: 10px;
+        }
+
+        /* 搜索框 */
+        .search-box {
+            display: flex;
+            gap: 10px;
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .search-box input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .search-box input:focus {
+            background: rgba(255,255,255,0.15);
+            box-shadow: 0 0 20px rgba(0,210,255,0.3);
+        }
+
+        .search-box button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+            color: #fff;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .search-box button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,210,255,0.4);
+        }
+
+        /* 分类标签 */
+        .filter-tabs {
+            display: flex;
+            gap: 10px;
+            padding: 20px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .filter-tab {
+            padding: 8px 20px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.8);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .filter-tab:hover, .filter-tab.active {
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+            color: #fff;
+        }
+
+        .filter-tab .count {
+            margin-left: 5px;
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        /* 论文列表 */
+        .papers-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 40px 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .paper-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .paper-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(0,210,255,0.3);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .paper-category {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+
+        .paper-category.recognition {
+            background: rgba(0,210,255,0.2);
+            color: #00d2ff;
+        }
+
+        .paper-category.generation {
+            background: rgba(255,107,107,0.2);
+            color: #ff6b6b;
+        }
+
+        .paper-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            line-height: 1.4;
+            color: #fff;
+        }
+
+        .paper-authors {
+            font-size: 13px;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 15px;
+        }
+
+        .paper-summary {
+            font-size: 14px;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.6;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .paper-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .paper-date {
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .paper-links a {
+            font-size: 12px;
+            color: #00d2ff;
+            text-decoration: none;
+            margin-left: 15px;
+            transition: opacity 0.3s;
+        }
+
+        .paper-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* 详情模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #1a1a2e;
+            border-radius: 20px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .modal-close:hover {
+            background: rgba(255,107,107,0.3);
+        }
+
+        .modal-body {
+            padding: 40px;
+        }
+
+        .modal-category {
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .modal-authors {
+            font-size: 16px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 25px;
+        }
+
+        .modal-section {
+            margin-bottom: 25px;
+        }
+
+        .modal-section h3 {
+            font-size: 16px;
+            color: #00d2ff;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-section p {
+            font-size: 15px;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.85);
+        }
+
+        .modal-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .modal-links a {
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .modal-links .arxiv-btn {
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+            color: #fff;
+        }
+
+        .modal-links .pdf-btn {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .modal-links a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        /* 空状态 */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .empty-state svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+
+        /* 加载动画 */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top-color: #00d2ff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-box {
+                max-width: 100%;
+            }
+
+            .filter-tabs {
+                padding: 15px 20px;
+                overflow-x: auto;
+            }
+
+            .papers-container {
+                padding: 15px 20px;
+                grid-template-columns: 1fr;
+            }
+
+            .modal-body {
+                padding: 25px;
+            }
+
+            .modal-title {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                📄 每日人脸论文推荐
+                <span>arXiv Papers</span>
+            </div>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="搜索论文标题、作者或关键词...">
+                <button onclick="searchPapers()">🔍 搜索</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 分类筛选 -->
+    <div class="filter-tabs">
+        <div class="filter-tab active" data-category="all" onclick="filterPapers('all')">
+            全部 <span class="count" id="countAll">(0)</span>
+        </div>
+        <div class="filter-tab" data-category="人脸识别" onclick="filterPapers('人脸识别')">
+            🔍 人脸识别 <span class="count" id="countRecognition">(0)</span>
+        </div>
+        <div class="filter-tab" data-category="人脸生成" onclick="filterPapers('人脸生成')">
+            🎨 人脸生成 <span class="count" id="countGeneration">(0)</span>
+        </div>
+    </div>
+
+    <!-- 论文列表 -->
+    <div class="papers-container" id="papersContainer">
+        <div class="loading">
+            <div class="loading-spinner"></div>
+        </div>
+    </div>
+
+    <!-- 论文详情模态框 -->
+    <div class="modal" id="paperModal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="hideModal()">×</button>
+            <div class="modal-body" id="modalBody">
+                <!-- 内容动态加载 -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 全局变量
+        let allPapers = [];
+        let currentFilter = 'all';
+
+        // 加载论文数据
+        async function loadPapers() {
+            try {
+                const response = await fetch('papers.json');
+                allPapers = await response.json();
+                renderPapers(allPapers);
+                updateCounts();
+            } catch (error) {
+                console.error('加载论文失败:', error);
+                document.getElementById('papersContainer').innerHTML = `
+                    <div class="empty-state">
+                        <p>加载论文数据失败，请确保 papers.json 文件存在</p>
+                    </div>
+                `;
+            }
+        }
+
+        // 更新分类计数
+        function updateCounts() {
+            const recognition = allPapers.filter(p => p.category === '人脸识别').length;
+            const generation = allPapers.filter(p => p.category === '人脸生成').length;
+
+            document.getElementById('countAll').textContent = `(${allPapers.length})`;
+            document.getElementById('countRecognition').textContent = `(${recognition})`;
+            document.getElementById('countGeneration').textContent = `(${generation})`;
+        }
+
+        // 渲染论文列表
+        function renderPapers(papers) {
+            const container = document.getElementById('papersContainer');
+
+            if (papers.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                        </svg>
+                        <p>没有找到相关论文</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = papers.map((paper, index) => `
+                <div class="paper-card" onclick="showPaperDetail(${index})">
+                    <span class="paper-category ${paper.category === '人脸识别' ? 'recognition' : 'generation'}">
+                        ${paper.category === '人脸识别' ? '🔍' : '🎨'} ${paper.category}
+                    </span>
+                    <h3 class="paper-title">${paper.title}</h3>
+                    <p class="paper-authors">👤 ${paper.authors.join(', ')}</p>
+                    <p class="paper-summary">${paper.summary}</p>
+                    <div class="paper-meta">
+                        <span class="paper-date">📅 ${paper.published}</span>
+                        <div class="paper-links">
+                            <a href="${paper.arxiv_link}" target="_blank">arXiv</a>
+                            <a href="${paper.pdf_link}" target="_blank">PDF</a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 筛选论文
+        function filterPapers(category) {
+            currentFilter = category;
+
+            // 更新标签状态
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.dataset.category === category) {
+                    tab.classList.add('active');
+                }
+            });
+
+            // 筛选论文
+            if (category === 'all') {
+                renderPapers(allPapers);
+            } else {
+                const filtered = allPapers.filter(p => p.category === category);
+                renderPapers(filtered);
+            }
+        }
+
+        // 搜索论文
+        function searchPapers() {
+            const keyword = document.getElementById('searchInput').value.trim().toLowerCase();
+
+            if (!keyword) {
+                filterPapers(currentFilter);
+                return;
+            }
+
+            const filtered = allPapers.filter(paper => {
+                return paper.title.toLowerCase().includes(keyword) ||
+                       paper.authors.some(a => a.toLowerCase().includes(keyword)) ||
+                       paper.summary.toLowerCase().includes(keyword) ||
+                       paper.keywords.some(k => k.toLowerCase().includes(keyword));
+            });
+
+            renderPapers(filtered);
+        }
+
+        // 回车搜索
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchPapers();
+            }
+        });
+
+        // 显示论文详情
+        function showPaperDetail(index) {
+            // 根据当前筛选状态获取正确的索引
+            let paper;
+            if (currentFilter === 'all') {
+                paper = allPapers[index];
+            } else {
+                const filtered = allPapers.filter(p => p.category === currentFilter);
+                paper = filtered[index];
+            }
+
+            if (!paper) return;
+
+            const modal = document.getElementById('paperModal');
+            const modalBody = document.getElementById('modalBody');
+
+            modalBody.innerHTML = `
+                <div class="modal-category">
+                    <span class="paper-category ${paper.category === '人脸识别' ? 'recognition' : 'generation'}">
+                        ${paper.category === '人脸识别' ? '🔍' : '🎨'} ${paper.category}
+                    </span>
+                </div>
+                <h1 class="modal-title">${paper.title}</h1>
+                <p class="modal-authors">👤 ${paper.authors.join(', ')}</p>
+
+                <div class="modal-section">
+                    <h3>📝 论文简介</h3>
+                    <p>${paper.summary}</p>
+                </div>
+
+                <div class="modal-section">
+                    <h3>🏷️ 关键词</h3>
+                    <p>${paper.keywords.join(', ')}</p>
+                </div>
+
+                <div class="modal-section">
+                    <h3>📅 发布信息</h3>
+                    <p>arXiv ID: ${paper.id}</p>
+                    <p>发布日期: ${paper.published}</p>
+                </div>
+
+                <div class="modal-links">
+                    <a href="${paper.arxiv_link}" target="_blank" class="arxiv-btn">
+                        📄 查看 arXiv 页面
+                    </a>
+                    <a href="${paper.pdf_link}" target="_blank" class="pdf-btn">
+                        📥 下载 PDF
+                    </a>
+                </div>
+            `;
+
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // 关闭模态框
+        function hideModal() {
+            const modal = document.getElementById('paperModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        function closeModal(event) {
+            if (event.target.classList.contains('modal')) {
+                hideModal();
+            }
+        }
+
+        // ESC 关闭模态框
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                hideModal();
+            }
+        });
+
+        // 初始化
+        loadPapers();
+    </script>
+</body>
+</html>
