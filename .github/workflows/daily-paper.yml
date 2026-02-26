@@ -14,7 +14,6 @@ on:
 jobs:
   update-papers:
     runs-on: ubuntu-latest
-
     steps:
       # 1. 检出代码
       - name: Checkout repository
@@ -26,88 +25,70 @@ jobs:
         with:
           python-version: '3.11'
 
-      # 3. 安装依赖
-      - name: Install dependencies
+      # 3. 运行论文获取脚本
+      - name: Fetch papers from multiple sources
+        id: fetch
         run: |
-          python -m pip install --upgrade pip
-
-      # 4. 运行论文获取脚本
-      - name: Fetch papers from arXiv
-        run: |
+          echo "========================================"
+          echo "  正在获取人脸识别/生成论文..."
+          echo "  数据来源: arXiv, CVPR, NeurIPS"
+          echo "========================================"
           python scripts/main.py
 
-      # 5. 更新论文统计
-      - name: Update paper count
-        id: count
-        run: |
-          python -c "
-          import json
-          from datetime import datetime
-
-          # 读取论文数据
-          with open('papers.json', 'r', encoding='utf-8') as f:
-              papers = json.load(f)
-
-          total = len(papers)
-          recognition = len([p for p in papers if p.get('category') == '人脸识别'])
-          generation = len([p for p in papers if p.get('category') == '人脸生成'])
-
-          print(f'Total: {total}, Recognition: {recognition}, Generation: {generation}')
-
-          # 输出给GitHub Actions
-          print(f'::set-output name=total::{total}')
-          print(f'::set-output name=recognition::{recognition}')
-          print(f'::set-output name=generation::{generation}')
-
-          # 更新README中的日期
-          today = datetime.now().strftime('%Y-%m-%d')
-          with open('README.md', 'r', encoding='utf-8') as f:
-              readme = f.read()
-
-          # 更新日期
-          readme = readme.replace('今日推荐 (YYYY-MM-DD)', f'今日推荐 ({today})')
-
-          # 更新统计
-          readme = readme.replace('**人脸识别论文**: X 篇', f'**人脸识别论文**: {recognition} 篇')
-          readme = readme.replace('**人脸生成论文**: X 篇', f'**人脸生成论文**: {generation} 篇')
-          readme = readme.replace('**总计**: X 篇', f'**总计**: {total} 篇')
-
-          with open('README.md', 'w', encoding='utf-8') as f:
-              f.write(readme)
-          "
-
-      # 6. 配置 Git 用户信息
+      # 4. 配置 Git
       - name: Configure Git
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
 
-      # 7. 检查是否有更改
+      # 5. 检查更改
       - name: Check for changes
         id: check_changes
         run: |
           if git diff --quiet; then
             echo "changed=false" >> $GITHUB_OUTPUT
-            echo "No new papers today"
           else
             echo "changed=true" >> $GITHUB_OUTPUT
+            git diff --stat
           fi
 
-      # 8. 提交更改
+      # 6. 提交并推送
       - name: Commit and push
         if: steps.check_changes.outputs.changed == 'true'
         run: |
           DATE=$(date +%Y-%m-%d)
+          echo ""
+          echo "========================================"
+          echo "  📚 提交论文更新..."
+          echo "========================================"
           git add -A
-          git commit -m "📚 Daily papers update - $DATE" || exit 0
+          git commit -m "📚 Daily papers update - $DATE"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # 9. 输出结果
+      # 7. 显示结果摘要
       - name: Summary
-        if: steps.check_changes.outputs.changed == 'true'
         run: |
-          echo "✅ 今日论文推荐已更新"
-          echo "📊 论文总数: ${{ steps.count.outputs.total }}"
-          echo "📁 查看 [README.md](./README.md)"
+          echo ""
+          echo "========================================"
+          echo "  ✅ 更新完成!"
+          echo "========================================"
+          echo ""
+          echo "📊 查看更新:"
+          echo "  - 论文列表: https://xiaoshaozizc.github.io/daily-face-papers/"
+          echo "  - GitHub: https://github.com/xiaoshaozizc/daily-face-papers"
+          echo "  - Actions: https://github.com/xiaoshaozizc/daily-face-papers/actions"
+          echo ""
+
+      # 8. 如果没有新论文也显示
+      - name: No changes message
+        if: steps.check_changes.outputs.changed == 'false'
+        run: |
+          echo ""
+          echo "========================================"
+          echo "  ℹ️ 今日暂无新论文"
+          echo "========================================"
+          echo "📊 查看现有论文:"
+          echo "  - https://xiaoshaozizc.github.io/daily-face-papers/"
+          echo ""
