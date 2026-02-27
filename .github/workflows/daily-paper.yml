@@ -8,12 +8,19 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   update-papers:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -31,29 +38,18 @@ jobs:
 
           today = datetime.now().strftime('%Y-%m-%d')
 
-          # 读取论文数据
           with open('papers.json', 'r', encoding='utf-8') as f:
               papers = json.load(f)
 
-          # 统计
           total = len(papers)
           recognition = len([p for p in papers if p.get('category') == '人脸识别'])
           generation = len([p for p in papers if p.get('category') == '人脸生成'])
 
-          # 读取 README
           with open('README.md', 'r', encoding='utf-8') as f:
               readme = f.read()
 
-          # 替换日期
-          readme = readme.replace('今日推荐 (', f'今日推荐 ({today}').replace('今日推荐 (2025-', f'今日推荐 ({today}')
-
-          # 替换统计数字
-          readme = readme.replace('人脸识别论文**: ' + str(recognition) + ' 篇', '人脸识别论文**: ' + str(recognition) + ' 篇')
-          readme = readme.replace('人脸生成论文**: ' + str(generation) + ' 篇', '人脸生成论文**: ' + str(generation) + ' 篇')
-          readme = readme.replace('总计**: ' + str(total) + ' 篇', '总计**: ' + str(total) + ' 篇')
-
-          # 如果没有匹配到数字（首次运行），使用固定格式
           import re
+          readme = re.sub(r'今日推荐 \(\d{4}-\d{2}-\d{2}\)', f'今日推荐 ({today})', readme)
           readme = re.sub(r'\*\*人脸识别论文\*\*: \d+ 篇', f'**人脸识别论文**: {recognition} 篇', readme)
           readme = re.sub(r'\*\*人脸生成论文\*\*: \d+ 篇', f'**人脸生成论文**: {generation} 篇', readme)
           readme = re.sub(r'\*\*总计\*\*: \d+ 篇', f'**总计**: {total} 篇', readme)
@@ -61,18 +57,13 @@ jobs:
           with open('README.md', 'w', encoding='utf-8') as f:
               f.write(readme)
 
-          print('README updated: ' + str(total) + ' papers')
+          print('Updated: ' + str(total) + ' papers')
           "
-
-      - name: Configure Git
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
 
       - name: Commit and push
         run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
           git add -A
           git diff --quiet || git commit -m "📚 Update papers - $(date +%Y-%m-%d)"
           git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
