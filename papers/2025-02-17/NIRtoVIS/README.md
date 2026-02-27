@@ -17,4 +17,3 @@ NIR to VIS, cross-modal, face recognition
 
 ## 链接
 - [arXiv](https://arxiv.org/abs/2502.12541)
-- [PDF](https://arxiv.org/pdf/2502.12541.pdf)

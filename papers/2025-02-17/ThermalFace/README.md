@@ -17,4 +17,3 @@ infrared face recognition, thermal imaging, deep learning
 
 ## 链接
 - [arXiv](https://arxiv.org/abs/2502.13322)
-- [PDF](https://arxiv.org/pdf/2502.13322.pdf)

@@ -17,4 +17,3 @@ face editing, stable diffusion, identity preservation
 
 ## 链接
 - [arXiv](https://arxiv.org/abs/2502.14201)
-- [PDF](https://arxiv.org/pdf/2502.14201.pdf)

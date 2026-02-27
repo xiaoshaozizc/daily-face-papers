@@ -17,4 +17,3 @@ LWIR, infrared, outdoor face recognition
 
 ## 链接
 - [arXiv](https://arxiv.org/abs/2502.08845)
-- [PDF](https://arxiv.org/pdf/2502.08845.pdf)

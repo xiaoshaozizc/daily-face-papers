@@ -17,4 +17,3 @@ face reconstruction, face from features, diffusion model
 
 ## 链接
 - [arXiv](https://arxiv.org/abs/2502.13876)
-- [PDF](https://arxiv.org/pdf/2502.13876.pdf)

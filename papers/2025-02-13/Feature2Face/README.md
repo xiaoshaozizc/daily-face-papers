@@ -17,4 +17,3 @@ feature to face, image reconstruction, GAN
 
 ## 链接
 - [arXiv](https://arxiv.org/abs/2502.11567)
-- [PDF](https://arxiv.org/pdf/2502.11567.pdf)
