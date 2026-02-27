@@ -18,6 +18,8 @@ jobs:
       # 1. 检出代码
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       # 2. 设置 Python 环境
       - name: Set up Python
@@ -27,7 +29,6 @@ jobs:
 
       # 3. 运行论文获取脚本
       - name: Fetch papers from multiple sources
-        id: fetch
         run: |
           echo "========================================"
           echo "  正在获取人脸识别/生成论文..."
@@ -35,24 +36,66 @@ jobs:
           echo "========================================"
           python scripts/main.py
 
-      # 4. 配置 Git
+      # 4. 更新 README 日期和统计
+      - name: Update README with date and count
+        run: |
+          python -c "
+          import json
+          from datetime import datetime
+          import re
+
+          today = datetime.now().strftime('%Y-%m-%d')
+
+          # 读取论文数据
+          with open('papers.json', 'r', encoding='utf-8') as f:
+              papers = json.load(f)
+
+          total = len(papers)
+          recognition = len([p for p in papers if p.get('category') == '人脸识别'])
+          generation = len([p for p in papers if p.get('category') == '人脸生成'])
+
+          # 读取 README
+          with open('README.md', 'r', encoding='utf-8') as f:
+              readme = f.read()
+
+          # 更新日期
+          readme = re.sub(r'今日推荐 \(\d{4}-\d{2}-\d{2}\)', f'今日推荐 ({today})', readme)
+
+          # 更新统计
+          readme = re.sub(r'\*\*人脸识别论文\*\*: \d+ 篇', f'**人脸识别论文**: {recognition} 篇', readme)
+          readme = re.sub(r'\*\*人脸生成论文\*\*: \d+ 篇', f'**人脸生成论文**: {generation} 篇', readme)
+          readme = re.sub(r'\*\*总计\*\*: \d+ 篇', f'**总计**: {total} 篇', readme)
+
+          # 写入 README
+          with open('README.md', 'w', encoding='utf-8') as f:
+              f.write(readme)
+
+          print(f'✅ README 已更新: {today}')
+          print(f'   人脸识别: {recognition} 篇')
+          print(f'   人脸生成: {generation} 篇')
+          print(f'   总计: {total} 篇')
+          "
+
+      # 5. 配置 Git
       - name: Configure Git
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
 
-      # 5. 检查更改
+      # 6. 检查更改
       - name: Check for changes
         id: check_changes
         run: |
           if git diff --quiet; then
             echo "changed=false" >> $GITHUB_OUTPUT
+            echo "ℹ️ 今日暂无新论文需要更新"
           else
             echo "changed=true" >> $GITHUB_OUTPUT
+            echo "有内容更新:"
             git diff --stat
           fi
 
-      # 6. 提交并推送
+      # 7. 提交并推送
       - name: Commit and push
         if: steps.check_changes.outputs.changed == 'true'
         run: |
@@ -67,7 +110,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # 7. 显示结果摘要
+      # 8. 显示结果摘要
       - name: Summary
         run: |
           echo ""
@@ -78,10 +121,9 @@ jobs:
           echo "📊 查看更新:"
           echo "  - 论文列表: https://xiaoshaozizc.github.io/daily-face-papers/"
           echo "  - GitHub: https://github.com/xiaoshaozizc/daily-face-papers"
-          echo "  - Actions: https://github.com/xiaoshaozizc/daily-face-papers/actions"
           echo ""
 
-      # 8. 如果没有新论文也显示
+      # 9. 没有变化时也显示
       - name: No changes message
         if: steps.check_changes.outputs.changed == 'false'
         run: |
