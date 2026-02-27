@@ -24,6 +24,18 @@
     "source": "arXiv"
   },
   {
+    "id": "2502.13876",
+    "title": "FaceFromFeature: Photorealistic Face Reconstruction from Embedding Features",
+    "authors": ["Jianhua Lin", "Cheng Wang", "Xiaoming Liu"],
+    "summary": "FaceFromFeature 提出了一种从人脸嵌入特征重建高保真人脸图像的方法。该方法利用预训练的人脸编码器提取特征，再通过扩散模型从特征重建 photorealistic 人脸图像。在CelebA-HQ和FFHQ数据集上验证了方法的有效性。",
+    "pdf_link": "https://arxiv.org/pdf/2502.13876.pdf",
+    "arxiv_link": "https://arxiv.org/abs/2502.13876",
+    "published": "2025-02-18",
+    "category": "人脸生成",
+    "keywords": ["face reconstruction", "face from features", "diffusion model"],
+    "source": "arXiv"
+  },
+  {
     "id": "2502.13567",
     "title": "UltraFace: Ultra-Lightweight Face Detection for Real-Time Applications",
     "authors": ["Hao Li", "Feng Liu", "Wei Zhang"],
@@ -33,6 +45,18 @@
     "published": "2025-02-17",
     "category": "人脸识别",
     "keywords": ["face detection", "lightweight", "real-time"],
+    "source": "arXiv"
+  },
+  {
+    "id": "2502.13322",
+    "title": "ThermalFace: Infrared Face Recognition with Deep Thermal Imaging",
+    "authors": ["Wei Chen", "Yong Wang", "Jie Liu"],
+    "summary": "ThermalFace 研究了基于深度学习的红外人脸识别方法。红外图像不受光照影响，适合在黑暗环境中进行人脸识别。该方法提出了新的热红外人脸特征提取网络，在OTIR数据集上取得了先进的识别性能。",
+    "pdf_link": "https://arxiv.org/pdf/2502.13322.pdf",
+    "arxiv_link": "https://arxiv.org/abs/2502.13322",
+    "published": "2025-02-17",
+    "category": "人脸识别",
+    "keywords": ["infrared face recognition", "thermal imaging", "deep learning"],
     "source": "arXiv"
   },
   {
@@ -48,6 +72,18 @@
     "source": "arXiv"
   },
   {
+    "id": "2502.12541",
+    "title": "NIRtoVIS: Cross-Modal Face Recognition from Near-Infrared to Visible Light",
+    "authors": ["Qiang Sun", "Fang Liu", "Hao Zhao"],
+    "summary": "NIRtoVIS 提出了一种近红外到可见光的人脸跨模态识别方法。该方法通过GAN生成伪可见光图像，缩小近红外和可见光人脸图像之间的模态差异，在CASIA NIR-VIS 2.0数据集上取得了优异的跨模态识别效果。",
+    "pdf_link": "https://arxiv.org/pdf/2502.12541.pdf",
+    "arxiv_link": "https://arxiv.org/abs/2502.12541",
+    "published": "2025-02-15",
+    "category": "人脸识别",
+    "keywords": ["NIR to VIS", "cross-modal", "face recognition"],
+    "source": "arXiv"
+  },
+  {
     "id": "2502.11945",
     "title": "Cross-Domain Face Recognition via Domain Adaptation",
     "authors": ["Qiang Wang", "Xia Li", "Bin Chen"],
@@ -57,6 +93,18 @@
     "published": "2025-02-14",
     "category": "人脸识别",
     "keywords": ["face recognition", "domain adaptation", "cross-domain"],
+    "source": "arXiv"
+  },
+  {
+    "id": "2502.11567",
+    "title": "Feature2Face: Recovering Face Images from Deep Embedding Space",
+    "authors": ["Minghua Liu", "Jian Sun", "Xiaojie Wang"],
+    "summary": "Feature2Face 提出了一种从人脸深度特征嵌入恢复高质量人脸图像的方法。该方法使用生成对抗网络将压缩的人脸特征解码为逼真的人脸图像，可用于隐私保护的人脸识别系统和人脸特征可视化。",
+    "pdf_link": "https://arxiv.org/pdf/2502.11567.pdf",
+    "arxiv_link": "https://arxiv.org/abs/2502.11567",
+    "published": "2025-02-13",
+    "category": "人脸生成",
+    "keywords": ["feature to face", "image reconstruction", "GAN"],
     "source": "arXiv"
   },
   {
@@ -81,6 +129,18 @@
     "published": "2025-02-10",
     "category": "人脸识别",
     "keywords": ["face landmark", "keypoint detection", "efficient"],
+    "source": "arXiv"
+  },
+  {
+    "id": "2502.08845",
+    "title": "LWIR-Face: Long-Wave Infrared Face Recognition in Outdoor Environments",
+    "authors": ["Zhi Chen", "Guang Wang", "Jin Li"],
+    "summary": "LWIR-Face 研究了长波红外（LWIR）人脸识别在户外环境中的应用。针对长波红外图像的特点，该方法提出了多尺度特征融合和注意力机制，在户外人脸识别任务中显著提升了识别准确率。",
+    "pdf_link": "https://arxiv.org/pdf/2502.08845.pdf",
+    "arxiv_link": "https://arxiv.org/abs/2502.08845",
+    "published": "2025-02-09",
+    "category": "人脸识别",
+    "keywords": ["LWIR", "infrared", "outdoor face recognition"],
     "source": "arXiv"
   },
   {
